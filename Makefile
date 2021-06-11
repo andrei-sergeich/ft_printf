@@ -1,9 +1,10 @@
 NAME		=	libftprintf.a
 
 FL_LIST		=	ft_printf.c			ft_printf_utils.c 	ft_printf_flags.c 	ft_printf_flags_utils.c\
+				ft_printf_ptr.c		ft_printf_ptr_utils.c	\
+				ft_printf_uns_int.c	ft_printf_uns_int_utils.c\
 				ft_printf_symbols.c \
 				ft_printf_integer.c \
-				ft_printf_ptr.c		ft_printf_ptr_utils.c	
 
 LIB_DIR 	= ./libft
 

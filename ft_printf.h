@@ -47,7 +47,10 @@ int		not_zero_ptr_print(int len, char *ptr, t_fs flags);
 int		print_integer(int d, t_fs flags);
 int		get_integer(char *str, int tmp, t_fs flags);
 int		integerprinter(char *str, int tmp, t_fs flags);
-
+int		print_uns_int(unsigned int u, t_fs flags);
+char	*ft_itoa_ui(unsigned int u);
+int		get_uns_int(char *str, t_fs flags);
+int		uns_int_printer(char *str, t_fs flags);
 
 
 

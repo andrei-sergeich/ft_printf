@@ -5,15 +5,15 @@ int	zero_ptr_print(t_fs flags)
 	int		qbw;
 
 	qbw = 0;
-	if (flags.width >= 0)
+	if (flags.width >= 0 && flags.minus == 0)
 	{
-		qbw += print_width(flags.width, 3, 0);
-		qbw += print_with_prec(3, "0x0");
+		qbw += print_width(flags.width, 2, 0);
+		qbw += print_with_prec(2, "0x");
 	}
 	else
 	{
-		qbw += print_with_prec(3, "0x0");
-		qbw += print_width(flags.width, 3, 0);
+		qbw += print_with_prec(2, "0x");
+		qbw += print_width(flags.width, 2, 0);
 	}
 	return (qbw);
 }

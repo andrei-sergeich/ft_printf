@@ -27,11 +27,11 @@ int	ptr_printer(int qbw, int len, char *ptr, t_fs flags)
 	if (flags.minus == 1 && flags.prec > 0)
 	{
 		qbw += not_zero_ptr_print(len, ptr, flags);
-		qbw += print_width(flags.width, len + (flags.prec - len) + 2, 0);
+		qbw += print_width(flags.width, flags.prec + 2, 0);
 	}
 	if (flags.minus == 0 && flags.prec > 0)
 	{
-		qbw += print_width(flags.width, len + (flags.prec - len) + 2, 0);
+		qbw += print_width(flags.width, flags.prec + 2, 0);
 		qbw += not_zero_ptr_print(len, ptr, flags);
 	}
 	if (flags.minus == 0 && flags.prec <= 0)

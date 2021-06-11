@@ -6,7 +6,7 @@ int	print_char(char x, t_fs flags)
 
 	qbw = 0;
 	if (flags.minus == 1)
-		qbw = ft_putchar(x);
+		qbw += ft_putchar(x);
 	qbw += print_width(flags.width, 1, flags.zero);
 	if (flags.minus == 0)
 		qbw += ft_putchar(x);

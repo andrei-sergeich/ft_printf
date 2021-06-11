@@ -13,6 +13,8 @@ int	print_me(t_fs flags, va_list ap)
 		qbw = print_ptr(va_arg(ap, unsigned long long), flags);
 	if (flags.type == 'd' || flags.type == 'i')
 		qbw = print_integer(va_arg(ap, int), flags);
+	if (flags.type == 'u')
+		qbw = print_uns_int(/*maybe (unsigned int)*/va_arg(ap, unsigned int), flags);
 	if (flags.type == '%')
 		qbw = print_char('%', flags);
 	return (qbw);
