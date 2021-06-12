@@ -1,14 +1,16 @@
 NAME		=	libftprintf.a
 
-FL_LIST		=	ft_printf.c			ft_printf_utils.c 	ft_printf_flags.c 	ft_printf_flags_utils.c\
-				ft_printf_ptr.c		ft_printf_ptr_utils.c	\
+SRCS		=	ft_printf.c			ft_printf_utils.c 	ft_printf_fsp.c 	ft_printf_fsp_utils.c\
 				ft_printf_uns_int.c	ft_printf_uns_int_utils.c\
-				ft_printf_symbols.c \
 				ft_printf_integer.c \
+				ft_printf_symbols.c \
+				ft_printf_ptr.c	\
+				ft_printf_hex.c	\
 
 LIB_DIR 	= ./libft
+HEADER 		= ./ft_printf.h
 
-OBJS		=	$(patsubst %.c,%.o,$(FL_LIST))
+OBJS		=	$(patsubst %.c,%.o,$(SRCS))
 
 OPTFLAGS	=	-O2
 CFLAGS		=	-Wall -Wextra -Werror
@@ -16,23 +18,29 @@ CFLAGS		=	-Wall -Wextra -Werror
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			@make -C $(LIB_DIR)
+			@make re -C $(LIB_DIR)
 			@cp $(LIB_DIR)/libft.a $(NAME)
-			@ar rcs $(NAME) $?
+			@ar rcs $(NAME) $(OBJS)
 			@echo all done, my Master!
 
 %.o:		%.c ft_printf.h
-			@gcc $(CFLAGS) $(OPTFLAGS) -I ft_printf.h -c $< -o $@
+			gcc $(CFLAGS) $(OPTFLAGS) -I $(HEADER) -c $< -o $@
+
+norm:
+			norminette .
+
+test:
+			@gcc main_ft_printf.c $(NAME) && ./a.out
 
 clean:
-			@rm -f $(OBJS) $(OBJS_B)
+			@rm -f $(OBJS)
 			@make clean -C $(LIB_DIR)
 			@echo .o files destroyed, my Master!
 
 fclean:		clean
 			@rm -f $(NAME)
 			@make fclean -C $(LIB_DIR)
-			@echo all terminated - wooalya
+			@echo all terminated, my Master!
 
 re:			fclean all
 

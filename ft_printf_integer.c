@@ -1,40 +1,40 @@
 #include "ft_printf.h"
 
-int	integerprinter(char *str, int tmp, t_fs flags)
+int	integerprinter(char *str, int tmp, t_fs fsp)
 {
 	int	qbw;
 
 	qbw = 0;
-	if (tmp < 0 && flags.prec >= 0)
+	if (tmp < 0 && (fsp.prec >= 0 && tmp != -2147483648))
 		qbw += ft_putchar('-');
-	if (flags.prec >= 0)
-		qbw += print_width(flags.prec, ft_strlen(str), 1);
+	if (fsp.prec >= 0)
+		qbw += print_width(fsp.prec, ft_strlen(str), 1);
 	qbw += print_with_prec(ft_strlen(str), str);
 	return (qbw);
 }
 
-int	get_integer(char *str, int tmp, t_fs flags)
+int	get_integer(char *str, int tmp, t_fs fsp)
 {
 	int	qbw;
 
 	qbw = 0;
-	if (flags.minus == 1)
-		qbw += integerprinter(str, tmp, flags);
-	if (flags.prec >= 0 && (size_t)flags.prec < ft_strlen(str))
-		flags.prec = ft_strlen(str);
-	if (flags.prec >= 0)
+	if (fsp.minus == 1)
+		qbw += integerprinter(str, tmp, fsp);
+	if (fsp.prec >= 0 && (size_t)fsp.prec < ft_strlen(str))
+		fsp.prec = ft_strlen(str);
+	if (fsp.prec >= 0)
 	{
-		flags.width -= flags.prec;
-		qbw += print_width(flags.width, 0, 0);
+		fsp.width -= fsp.prec;
+		qbw += print_width(fsp.width, 0, 0);
 	}
 	else
-		qbw += print_width(flags.width, ft_strlen(str), flags.zero);
-	if (flags.minus == 0)
-		qbw += integerprinter(str, tmp, flags);
+		qbw += print_width(fsp.width, ft_strlen(str), fsp.zero);
+	if (fsp.minus == 0)
+		qbw += integerprinter(str, tmp, fsp);
 	return (qbw);
 }
 
-int	print_integer(int d, t_fs flags)
+int	print_integer(int d, t_fs fsp)
 {
 	int		qbw;
 	int		tmp;
@@ -42,22 +42,20 @@ int	print_integer(int d, t_fs flags)
 
 	qbw = 0;
 	tmp = d;
-	if (d == 0 && flags.prec == 0)
-		return (print_width(flags.width, 0, 0));
-	if (d < 0 && (flags.prec >= 0 || flags.zero == 1))
-	{
-		if (flags.zero == 1 && flags.prec == -1)
+	if (d == 0 && fsp.prec == 0)
+		return (print_width(fsp.width, 0, 0));
+	if (d < 0 && (fsp.prec >= 0 || fsp.zero == 1))
+	{	
+		if (fsp.zero == 1 && fsp.prec <= -1)
 			qbw += ft_putchar('-');
-		flags.width--;
+		if (d != -2147483648)
+			fsp.width--;
 		d = -d;
-		if (flags.prec >= 0)
-			flags.zero = 1;
+		if (fsp.prec >= 0)
+			fsp.zero = 1;
 	}
-	if (d == -2147483648)
-		str = ft_strdup("2147483648");
-	else
-		str = ft_itoa(d);
-	qbw += get_integer(str, tmp, flags);
+	str = ft_itoa(d);
+	qbw += get_integer(str, tmp, fsp);
 	free(str);
 	return (qbw);
 }

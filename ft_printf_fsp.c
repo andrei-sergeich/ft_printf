@@ -1,5 +1,12 @@
 #include "ft_printf.h"
 
+t_fs	ft_isminusflag(t_fs fsp)
+{
+	fsp.minus = 1;
+	fsp.zero = 0;
+	return (fsp);
+}
+
 int	ft_isflag(int x)
 {
 	if (x == '-' || x == '0' || x == '.' || x == '*')

@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int	uns_int_printer(int len, char *str, t_fs fsp)
+int	hex_printer(int len, char *str, t_fs fsp)
 {
 	int	qbw;
 
@@ -11,13 +11,13 @@ int	uns_int_printer(int len, char *str, t_fs fsp)
 	return (qbw);
 }
 
-int	get_uns_int(int len, char *str, t_fs fsp)
+int	get_hex(int len, char *str, t_fs fsp)
 {
 	int	qbw;
 
 	qbw = 0;
 	if (fsp.minus == 1)
-		qbw += uns_int_printer(len, str, fsp);
+		qbw += hex_printer(len, str, fsp);
 	if (fsp.prec >= 0 && fsp.prec < len)
 		fsp.prec = len;
 	if (fsp.prec >= 0)
@@ -28,23 +28,33 @@ int	get_uns_int(int len, char *str, t_fs fsp)
 	else
 		qbw += print_width(fsp.width, len, fsp.zero);
 	if (fsp.minus == 0)
-		qbw += uns_int_printer(len, str, fsp);
+		qbw += hex_printer(len, str, fsp);
 	return (qbw);
 }
 
-int	print_uns_int(unsigned int u, t_fs fsp)
+int	print_hex(unsigned int hex, t_fs fsp)
 {
-	int		qbw;
+	int		z;
 	int		len;
+	int		qbw;
 	char	*str;
 
+	z = 0;
 	qbw = 0;
-	u = (unsigned int)(4294967295 + 1 + u);
-	if (u == 0 && fsp.prec == 0)
+	hex = (unsigned int)(4294967295 + 1 + hex);
+	if (hex == 0 && fsp.prec == 0)
 		return (print_width(fsp.width, 0, 0));
-	str = ft_itoa_ui(u);
+	str = nbr_processing((unsigned long long)hex, fsp);
+	if (fsp.hexup)
+	{
+		while (str[z])
+		{
+			str[z] = ft_toupper(str[z]);
+			z++;
+		}
+	}
 	len = ft_strlen(str);
-	qbw += get_uns_int(len, str, fsp);
+	qbw += get_hex(len, str, fsp);
 	free(str);
 	return (qbw);
 }

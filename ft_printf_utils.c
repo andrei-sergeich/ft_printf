@@ -35,3 +35,42 @@ int	print_with_prec(int prec, char *str)
 	}
 	return (qbw);
 }
+
+char	*convers_to_str(unsigned long long tmp, int bt, char *str, t_fs flags)
+{
+	bt--;
+	while (tmp != 0)
+	{
+		if ((tmp % flags.base) < 10)
+			str[bt] = (tmp % flags.base) + 48;
+		else
+			str[bt] = (tmp % flags.base) + 87;
+		tmp /= flags.base;
+		bt--;
+	}
+	return (str);
+}
+
+char	*nbr_processing(unsigned long long p, t_fs flags)
+{
+	unsigned long long	tmp;
+	char				*str;
+	int					bt;
+
+	bt = 0;
+	str = 0;
+	tmp = p;
+	if (p == 0)
+		return (ft_strdup("0"));
+	while (p != 0)
+	{
+		p /= flags.base;
+		bt++;
+	}
+	str = (char *)malloc(sizeof(char) * (bt + 1));
+	if (!str)
+		return (0);
+	str[bt] = '\0';
+	str = convers_to_str(tmp, bt, str, flags);
+	return (str);
+}
