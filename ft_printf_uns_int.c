@@ -42,7 +42,7 @@ int	print_uns_int(unsigned int u, t_fs fsp)
 	u = (unsigned int)(4294967295 + 1 + u);
 	if (u == 0 && fsp.prec == 0)
 		return (print_width(fsp.width, 0, 0));
-	str = ft_itoa_ui(u);
+	str = ft_itoa_long(u);
 	len = ft_strlen(str);
 	qbw += get_uns_int(len, str, fsp);
 	free(str);

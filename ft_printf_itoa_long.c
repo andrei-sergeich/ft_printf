@@ -34,7 +34,7 @@ static char	*ft_converter(char *str, long tmp, int l)
 	return (str);
 }
 
-char	*ft_itoa_ui(unsigned int n)
+char	*ft_itoa_long(long n)
 {
 	char	*str;
 	int		l;

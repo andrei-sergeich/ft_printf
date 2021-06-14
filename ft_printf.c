@@ -43,6 +43,8 @@ int	fsp_checker(const char *format, int x, t_fs *fsp, va_list ap)
 			*fsp = ft_type_writer(*fsp, format[x]);
 			break ;
 		}
+		if (x + 1 == (int)ft_strlen(format))
+			return (x);
 		x++;
 	}
 	return (x);
@@ -60,8 +62,10 @@ void	format_string_parser(const char *format, t_fs *fsp, va_list ap)
 			break ;
 		if (format[x] != '%')
 			fsp->qbw += ft_putchar(format[x]);
-		if (format[x] == '%' && format[x + 1])
+		if (format[x] == '%')
 		{
+			if (x + 1 == (int)ft_strlen(format))
+				break ;
 			x = fsp_checker(format, ++x, fsp, ap);
 			if (ft_istype(format[x]))
 				fsp->qbw += print_me(*fsp, ap);

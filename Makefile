@@ -1,7 +1,7 @@
 NAME		=	libftprintf.a
 
 SRCS		=	ft_printf.c			ft_printf_utils.c 	ft_printf_fsp.c 	ft_printf_fsp_utils.c\
-				ft_printf_uns_int.c	ft_printf_uns_int_utils.c\
+				ft_printf_uns_int.c	ft_printf_itoa_long.c\
 				ft_printf_integer.c \
 				ft_printf_symbols.c \
 				ft_printf_ptr.c	\

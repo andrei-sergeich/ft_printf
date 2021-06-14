@@ -44,11 +44,11 @@ char	*nbr_processing(unsigned long long p, t_fs fsp);
 char	*convers_to_str(unsigned long long tmp, int bt, char *str, t_fs fsp);
 int		ptr_printer(int qbw, int len, char *ptr, t_fs fsp);
 int		not_zero_ptr_print(int len, char *ptr, t_fs fsp);
-int		print_integer(int d, t_fs fsp);
-int		get_integer(char *str, int tmp, t_fs fsp);
-int		integerprinter(char *str, int tmp, t_fs fsp);
+int		print_integer(long d, t_fs fsp);
+int		get_integer(char *str, long tmp, t_fs fsp);
+int		integerprinter(char *str, long tmp, t_fs fsp);
 int		print_uns_int(unsigned int u, t_fs fsp);
-char	*ft_itoa_ui(unsigned int u);
+char	*ft_itoa_long(long u);
 int		get_uns_int(int len, char *str, t_fs fsp);
 int		uns_int_printer(int len, char *str, t_fs fsp);
 int		print_hex(unsigned int hex, t_fs fsp);
@@ -57,7 +57,6 @@ int		hex_printer(int len, char *str, t_fs fsp);
 int		ft_isdigit(int c);
 size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s1);
-char	*ft_itoa(int n);
 int		ft_toupper(int c);
 
 #endif
