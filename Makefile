@@ -45,5 +45,3 @@ fclean:		clean
 re:			fclean all
 
 .PHONY:		all clean fclean re bonus
-
-# ЕСТЬ ПРОБЛЕМА ПОСЛЕ ПЕРЕСБОРКИ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
